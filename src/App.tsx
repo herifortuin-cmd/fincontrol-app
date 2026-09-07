@@ -84,6 +84,23 @@ export default function App() {
   
   const [customAlert, setCustomAlert] = useState(null); // { message, type: 'error' | 'success' | 'confirm', onConfirm }
 
+  const handleRoleChange = (newRole) => {
+    if (newRole === 'ADMIN') {
+      const pwd = prompt('Masukkan password Admin:');
+      if (pwd !== 'Dezha1234') {
+        alert('Password salah!');
+        return;
+      }
+    } else if (newRole === 'STAFF') {
+      const pwd = prompt('Masukkan password Staff:');
+      if (pwd !== '1234') {
+        alert('Password salah!');
+        return;
+      }
+    }
+    setRole(newRole);
+  };
+
   // Kalkulasi Utama (Hanya memproses transaksi yang ACTIVE / Valid)
   const stats = useMemo(() => {
     let totalIncome = 0;
@@ -284,7 +301,7 @@ export default function App() {
       <div className="p-4 border-t border-slate-800">
         <div className="bg-slate-800 rounded-lg p-3">
           <div className="text-xs text-slate-400 mb-2">Simulasi Akses (Role)</div>
-          <select value={role} onChange={(e) => setRole(e.target.value)}
+          <select value={role} onChange={(e) => handleRoleChange(e.target.value)}
             className="w-full bg-slate-900 text-white border border-slate-700 rounded p-1 text-sm focus:outline-none focus:border-emerald-500">
             <option value="OWNER">Owner (Read-Only+Verify)</option>
             <option value="ADMIN">Admin (Full Access)</option>
@@ -903,7 +920,7 @@ export default function App() {
           </div>
 
           <div className="flex items-center space-x-3 md:space-x-4">
-            <select value={role} onChange={(e) => setRole(e.target.value)}
+            <select value={role} onChange={(e) => handleRoleChange(e.target.value)}
               className="md:hidden bg-slate-100 text-slate-700 border border-slate-200 rounded-lg p-1.5 text-xs font-bold focus:outline-none">
               <option value="OWNER">Owner</option>
               <option value="ADMIN">Admin</option>
@@ -991,5 +1008,6 @@ export default function App() {
     </div>
   );
 }
+
 
 
