@@ -561,7 +561,7 @@ export default function App() {
             filteredTx.map(tx => (
               <div key={tx.id} onClick={() => openForm('PREVIEW', tx)} className={`bg-white p-4 active:bg-slate-50 transition-colors ${tx.status === 'VOID' ? 'opacity-60 grayscale-[50%]' : ''}`}>
                 <div className="flex justify-between items-start mb-1.5">
-                  <div className="text-xs text-slate-500 font-bold font-mono tracking-tight">{tx.id} <span className="text-slate-300 mx-1">•</span> <span className="font-sans text-slate-400 font-medium">{formatDate(tx.date)}</span></div>
+                  <div className="text-xs text-slate-500 font-medium">{formatDate(tx.date)}</div>
                   <div className={`font-black text-sm ${tx.status === 'VOID' ? 'text-slate-400 line-through' : tx.type === 'INCOME' ? 'text-emerald-600' : 'text-slate-800'}`}>
                     {tx.type === 'INCOME' ? '+' : '-'}{formatRupiah(tx.amount)}
                   </div>
@@ -1008,6 +1008,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
