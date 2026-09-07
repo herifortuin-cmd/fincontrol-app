@@ -11,17 +11,7 @@ const CATEGORIES = [
 ];
 
 // Data awal ditambahkan status: 'ACTIVE' untuk mendukung Soft Delete
-const INITIAL_DATA = [
-  { id: 'DM-001', date: '2026-07-21', type: 'INCOME', category: 'Modal Awal', description: 'Dana masuk tahap 1', amount: 3000000, recipient: 'Kas Usaha', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: 'Transfer via BCA', proofUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400&h=300' },
-  { id: 'DM-002', date: '2026-08-07', type: 'INCOME', category: 'Tambahan Modal', description: 'Dana operasional Agustus', amount: 5000000, recipient: 'Kas Usaha', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: 'Tunai', proofUrl: null },
-  { id: 'DM-003', date: '2026-08-16', type: 'INCOME', category: 'Tambahan Modal', description: 'Pembelian darurat', amount: 650000, recipient: 'Kas Usaha', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: 'Transfer via BRI', proofUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=400&h=300' },
-  { id: 'TRX-001', date: '2026-08-17', type: 'EXPENSE', category: 'Hama & Penyakit', description: 'Tridazol', amount: 135500, recipient: 'Shopee', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: 'Nota digital', proofUrl: 'https://images.unsplash.com/photo-1607519967657-3a11684c30c3?auto=format&fit=crop&q=80&w=400&h=300' },
-  { id: 'TRX-002', date: '2026-08-18', type: 'EXPENSE', category: 'Bibit & Penanaman', description: 'Bibit Raja Tavi', amount: 125000, recipient: 'Shopee', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: 'https://images.unsplash.com/photo-1588880331179-bc9b93a8cb65?auto=format&fit=crop&q=80&w=400&h=300' },
-  { id: 'TRX-003', date: '2026-08-18', type: 'EXPENSE', category: 'Pupuk', description: 'Gema Flora', amount: 102500, recipient: 'Shopee', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=400&h=300' },
-  { id: 'TRX-004', date: '2026-08-20', type: 'EXPENSE', category: 'Pupuk', description: 'Pupuk Kandang Kambing', amount: 225000, recipient: 'Toko Tani Natar', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: 'Kwitansi buatan sendiri', proofUrl: 'https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&q=80&w=400&h=300' },
-  { id: 'TRX-005', date: '2026-08-21', type: 'EXPENSE', category: 'Peralatan', description: 'DP Bambu', amount: 300000, recipient: 'Mang Asep', proofStatus: 'TIDAK_ADA', verificationStatus: 'UNVERIFIED', status: 'ACTIVE', notes: 'Mang Asep tidak ada nota, sedang dibuatkan bukti pengganti', proofUrl: null },
-  { id: 'TRX-006', date: '2026-09-02', type: 'EXPENSE', category: 'Pupuk', description: 'NPK Mutiara 50kg', amount: 850000, recipient: 'Toko Tani Makmur', proofStatus: 'LENGKAP', verificationStatus: 'UNVERIFIED', status: 'ACTIVE', notes: 'Nota terlampir', proofUrl: 'https://images.unsplash.com/photo-1607519967657-3a11684c30c3?auto=format&fit=crop&q=80&w=400&h=300' },
-];
+const INITIAL_DATA = [];
 
 const formatRupiah = (number) => {
   return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
