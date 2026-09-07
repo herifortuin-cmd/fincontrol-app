@@ -70,7 +70,7 @@ const formatDate = (dateString) => {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('DASHBOARD');
-  const [role, setRole] = useState('ADMIN'); // ADMIN, OWNER, STAFF
+  const [role, setRole] = useState('OWNER'); // ADMIN, OWNER, STAFF
   const [transactions, setTransactions] = useState(INITIAL_DATA);
   
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -1008,6 +1008,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
