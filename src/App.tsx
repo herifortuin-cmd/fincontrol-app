@@ -746,7 +746,7 @@ export default function App() {
                      <CheckCircle2 className="w-4 h-4 mr-2" /> Sahkan / Verifikasi
                    </button>
                  )}
-                 {!isVoid && (role === 'OWNER' || role === 'ADMIN') && (
+                 {!isVoid && role === 'ADMIN' && (
                    <button onClick={() => handleVoidTransaction(selectedTx.id)} className="w-full px-4 py-3 bg-white border-2 border-rose-100 text-rose-600 rounded-xl text-sm font-bold hover:bg-rose-50 transition-colors flex items-center justify-center mt-1">
                      <Trash2 className="w-4 h-4 mr-2" /> Batalkan Transaksi (Void)
                    </button>
@@ -1008,6 +1008,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
