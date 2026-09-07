@@ -680,7 +680,7 @@ export default function App() {
               <div className="hidden md:flex p-4 md:p-5 border-b border-slate-100 justify-between items-center bg-white shrink-0 sticky top-0 z-10">
                 <div>
                   <h3 className="text-lg font-black text-slate-800 leading-tight">Detail Transaksi</h3>
-                  <p className="text-xs text-slate-500 mt-0.5 font-mono font-bold tracking-tight">{selectedTx.id}</p>
+                  
                 </div>
                 <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-rose-600 bg-slate-50 p-2 rounded-full hover:bg-rose-50 transition-colors"><XCircle className="w-6 h-6"/></button>
               </div>
@@ -1008,6 +1008,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
