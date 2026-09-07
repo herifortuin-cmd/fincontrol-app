@@ -506,7 +506,7 @@ export default function App() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-white border-b border-slate-100 text-[11px] uppercase text-slate-400 font-bold tracking-wider">
-                <th className="p-4">Tanggal & ID</th>
+                <th className="p-4">Tanggal</th>
                 <th className="p-4">Keterangan</th>
                 <th className="p-4">Kategori</th>
                 <th className="p-4 text-right">Nominal</th>
@@ -522,7 +522,7 @@ export default function App() {
                   <tr key={tx.id} className={`hover:bg-slate-50/50 group transition-colors ${tx.status === 'VOID' ? 'bg-slate-50/80 opacity-60 grayscale-[50%]' : ''}`}>
                     <td className="p-4">
                       <div className={`font-semibold ${tx.status === 'VOID' ? 'text-slate-500 line-through' : 'text-slate-800'}`}>{formatDate(tx.date)}</div>
-                      <div className="text-xs text-slate-400 mt-0.5 font-mono">{tx.id}</div>
+                      
                     </td>
                     <td className="p-4 max-w-[200px]">
                       <div className={`font-semibold truncate ${tx.status === 'VOID' ? 'text-slate-500 line-through' : 'text-slate-700'}`}>{tx.description}</div>
@@ -1008,6 +1008,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
