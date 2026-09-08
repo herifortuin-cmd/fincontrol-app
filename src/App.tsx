@@ -79,6 +79,34 @@ export default function App() {
     fetchTransactions();
   }, []);
 
+
+
+  const fetchTransactions = async () => {
+    setIsLoading(true);
+    const { data, error } = await supabase.from('transactions').select('*').order('date', { ascending: false });
+    if (!error && data) {
+      const mappedData = data.map(item => ({
+        id: item.id, date: item.date, type: item.type, category: item.category, description: item.description,
+        amount: item.amount, recipient: item.recipient, proofStatus: item.proof_status,
+        verificationStatus: item.verification_status, status: item.status, notes: item.notes, proofUrl: item.proof_url
+      }));
+      setTransactions(mappedData.sort((a, b) => new Date(b.date) - new Date(a.date)));
+    }
+    setIsLoading(false);
+  };
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('EXPENSE'); 
+  const [selectedTx, setSelectedTx] = useState(null);
+  const [isFabOpen, setIsFabOpen] = useState(false);
+  
+  const [filterSearch, setFilterSearch] = useState('');
+  const [filterType, setFilterType] = useState('ALL');
+  const [filterCategory, setFilterCategory] = useState('ALL');
+  
+  const [customAlert, setCustomAlert] = useState(null);
+  const [formData, setFormData] = useState(null); // { message, type: 'error' | 'success' | 'confirm', onConfirm }
+
   // Sinkronisasi Tab dengan Tombol Back Browser
   useEffect(() => {
     const handleHashChange = () => {
@@ -109,32 +137,6 @@ export default function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, [isModalOpen]);
-
-  const fetchTransactions = async () => {
-    setIsLoading(true);
-    const { data, error } = await supabase.from('transactions').select('*').order('date', { ascending: false });
-    if (!error && data) {
-      const mappedData = data.map(item => ({
-        id: item.id, date: item.date, type: item.type, category: item.category, description: item.description,
-        amount: item.amount, recipient: item.recipient, proofStatus: item.proof_status,
-        verificationStatus: item.verification_status, status: item.status, notes: item.notes, proofUrl: item.proof_url
-      }));
-      setTransactions(mappedData.sort((a, b) => new Date(b.date) - new Date(a.date)));
-    }
-    setIsLoading(false);
-  };
-  
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalType, setModalType] = useState('EXPENSE'); 
-  const [selectedTx, setSelectedTx] = useState(null);
-  const [isFabOpen, setIsFabOpen] = useState(false);
-  
-  const [filterSearch, setFilterSearch] = useState('');
-  const [filterType, setFilterType] = useState('ALL');
-  const [filterCategory, setFilterCategory] = useState('ALL');
-  
-  const [customAlert, setCustomAlert] = useState(null);
-  const [formData, setFormData] = useState(null); // { message, type: 'error' | 'success' | 'confirm', onConfirm }
 
   const handleRoleChange = (newRole) => {
     if (newRole === 'ADMIN') {
