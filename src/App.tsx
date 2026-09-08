@@ -238,7 +238,7 @@ export default function App() {
   const handleVoidTransaction = (id) => {
     if (role !== 'ADMIN') { setCustomAlert({ type: 'error', message: 'Hanya Admin yang memiliki akses untuk membatalkan transaksi.'}); return; }
     setCustomAlert({
-      type: 'confirm', message: "Yakin ingin MEMBATALKAN transaksi " + id + "? Data akan di-Void dan tidak dihitung dalam saldo.,
+      type: 'confirm', message: "Yakin ingin MEMBATALKAN transaksi " + id + "? Data akan di-Void dan tidak dihitung dalam saldo.",
       onConfirm: async () => {
         setTransactions(transactions.map(t => t.id === id ? { ...t, status: 'VOID', verificationStatus: 'UNVERIFIED' } : t));
         await supabase.from('transactions').update({ status: 'VOID', verification_status: 'UNVERIFIED' }).eq('id', id);
@@ -1024,6 +1024,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
