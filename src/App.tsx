@@ -71,7 +71,7 @@ const formatDate = (dateString) => {
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('DASHBOARD');
-  const [role, setRole] = useState('OWNER'); // ADMIN, OWNER, STAFF
+  const [role, setRole] = useState(localStorage.getItem('fincontrol_role') || 'OWNER'); // ADMIN, OWNER, STAFF
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -152,6 +152,7 @@ export default function App() {
         return;
       }
     }
+    localStorage.setItem('fincontrol_role', newRole);
     setRole(newRole);
   };
 
