@@ -248,7 +248,7 @@ export default function App() {
     setIsFabOpen(false);
   };
 
-  const AlertBox = () => {
+  const renderAlertBox = () => {
     if (!customAlert) return null;
     return (
       <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-[200] p-4">
@@ -458,7 +458,7 @@ export default function App() {
     </div>
   );
 
-  const TransactionsView = () => {
+  const renderTransactionsView = () => {
     // Implementasi Search & Filter yang ketat
     const filteredTx = transactions.filter(t => {
       const matchType = filterType === 'ALL' || t.type === filterType;
@@ -593,7 +593,7 @@ export default function App() {
     );
   };
 
-  const ProofGalleryView = () => {
+  const renderProofGalleryView = () => {
     // Galeri hanya menampilkan transaksi ACTIVE yang memiliki foto bukti
     const transactionsWithProof = transactions.filter(t => t.status === 'ACTIVE' && t.proofUrl && (filterType === 'ALL' || t.type === filterType));
 
@@ -644,7 +644,7 @@ export default function App() {
     );
   };
 
-  const FormModal = () => {
+  const renderFormModal = () => {
     // PREVIEW MODE (Menampilkan Detail dan Bukti)
     if (modalType === 'PREVIEW' && selectedTx) {
       const isVoid = selectedTx.status === 'VOID';
@@ -921,7 +921,7 @@ export default function App() {
     <div className="flex min-h-screen bg-slate-50 font-sans pb-16 md:pb-0">
       <Sidebar />
       <MobileBottomNav />
-      <AlertBox />
+      {renderAlertBox()}
       
       <main className="flex-1 md:ml-64 flex flex-col h-[calc(100vh-4rem)] md:h-screen overflow-hidden relative">
         
@@ -983,8 +983,8 @@ export default function App() {
             </div>
 
             {activeTab === 'DASHBOARD' && <DashboardView />}
-            {activeTab === 'TRANSAKSI' && <TransactionsView />}
-            {activeTab === 'BUKTI' && <ProofGalleryView />}
+            {activeTab === 'TRANSAKSI' && {renderTransactionsView()}}
+            {activeTab === 'BUKTI' && {renderProofGalleryView()}}
           </div>
         </div>
       </main>
@@ -1021,10 +1021,11 @@ export default function App() {
         </div>
       )}
 
-      {isModalOpen && <FormModal />}
+      {isModalOpen && {renderFormModal()}}
     </div>
   );
 }
+
 
 
 
