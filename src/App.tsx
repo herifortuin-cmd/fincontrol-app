@@ -102,7 +102,8 @@ export default function App() {
   const [filterType, setFilterType] = useState('ALL');
   const [filterCategory, setFilterCategory] = useState('ALL');
   
-  const [customAlert, setCustomAlert] = useState(null); // { message, type: 'error' | 'success' | 'confirm', onConfirm }
+  const [customAlert, setCustomAlert] = useState(null);
+  const [formData, setFormData] = useState(null); // { message, type: 'error' | 'success' | 'confirm', onConfirm }
 
   const handleRoleChange = (newRole) => {
     if (newRole === 'ADMIN') {
@@ -282,7 +283,7 @@ export default function App() {
     { id: 'BUKTI', icon: ImageIcon, label: 'Galeri Bukti' },
   ];
 
-  const Sidebar = () => (
+  const renderSidebar = () => (
     <div className="hidden md:flex w-64 bg-slate-900 text-slate-300 flex-col h-screen fixed left-0 top-0">
       <div className="p-6 border-b border-slate-800">
         <h1 className="text-xl font-bold text-white tracking-tight">Fin<span className="text-emerald-500">Control</span></h1>
@@ -314,7 +315,7 @@ export default function App() {
     </div>
   );
 
-  const MobileBottomNav = () => (
+  const renderMobileBottomNav = () => (
     <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 z-30 px-2 pb-safe shadow-[0_-4px_10px_-2px_rgba(0,0,0,0.05)]">
        {NAV_ITEMS.map((item) => (
           <button key={item.id} onClick={() => setActiveTab(item.id)}
@@ -328,7 +329,7 @@ export default function App() {
     </div>
   );
 
-  const DashboardView = () => (
+  const renderDashboardView = () => (
     <div className="space-y-4 md:space-y-6 animate-in fade-in duration-500">
       
       {/* KARTU UTAMA (BERDASARKAN DATA VALID/ACTIVE) */}
@@ -919,8 +920,8 @@ export default function App() {
 
   return (
     <div className="flex min-h-screen bg-slate-50 font-sans pb-16 md:pb-0">
-      <Sidebar />
-      <MobileBottomNav />
+      {renderSidebar()}
+      {renderMobileBottomNav()}
       {renderAlertBox()}
       
       <main className="flex-1 md:ml-64 flex flex-col h-[calc(100vh-4rem)] md:h-screen overflow-hidden relative">
@@ -982,7 +983,7 @@ export default function App() {
               </p>
             </div>
 
-            {activeTab === 'DASHBOARD' && <DashboardView />}
+            {activeTab === 'DASHBOARD' && renderDashboardView()}
             {activeTab === 'TRANSAKSI' && renderTransactionsView()}
             {activeTab === 'BUKTI' && renderProofGalleryView()}
           </div>
@@ -1025,6 +1026,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
