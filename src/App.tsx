@@ -178,55 +178,41 @@ export default function App() {
     };
   }, [transactions]);
 
-  const handleSaveTransaction = (formData) => {
-    // Validasi Dasar
+  const handleSaveTransaction = async (formData) => {
     const amount = Math.abs(Number(formData.amount));
-    if (isNaN(amount) || amount <= 0) {
-      setCustomAlert({ type: 'error', message: 'Nominal tidak valid. Harus lebih besar dari 0.' });
-      return;
-    }
-    if (!formData.description || !formData.recipient) {
-      setCustomAlert({ type: 'error', message: 'Keterangan dan Penerima wajib diisi.' });
-      return;
-    }
+    if (isNaN(amount) || amount <= 0) { setCustomAlert({ type: 'error', message: 'Nominal tidak valid. Harus lebih besar dari 0.' }); return; }
+    if (!formData.description || !formData.recipient) { setCustomAlert({ type: 'error', message: 'Keterangan dan Penerima wajib diisi.' }); return; }
+
+    let dbItem = {
+      date: formData.date, type: formData.type, category: formData.category, description: formData.description,
+      amount: amount, recipient: formData.recipient, proof_status: formData.proofStatus, status: 'ACTIVE',
+      notes: formData.notes || '', proof_url: formData.proofUrl || null
+    };
 
     if (selectedTx) {
-      // EDIT MODE
-      setTransactions(transactions.map(t => {
-        if (t.id === selectedTx.id) {
-          // Aturan Akuntansi: Jika diedit, hapus status verifikasinya agar diperiksa ulang
-          const isChanged = t.amount !== amount || t.proofStatus !== formData.proofStatus;
-          return { 
-            ...t, 
-            ...formData, 
-            amount, 
-            verificationStatus: isChanged ? 'UNVERIFIED' : t.verificationStatus 
-          };
-        }
-        return t;
-      }));
-    } else {
-      // INSERT MODE
-      const prefix = formData.type === 'INCOME' ? 'DM' : 'TRX';
+      const isChanged = selectedTx.amount !== amount || selectedTx.proofStatus !== formData.proofStatus;
+      dbItem.verification_status = isChanged ? 'UNVERIFIED' : selectedTx.verificationStatus;
       
-      // Algoritma ID yang aman (mencegah duplicate meski ada data dihapus)
+      setTransactions(transactions.map(t => t.id === selectedTx.id ? { ...t, ...formData, amount, verificationStatus: dbItem.verification_status } : t));
+      await supabase.from('transactions').update(dbItem).eq('id', selectedTx.id);
+    } else {
+      const prefix = formData.type === 'INCOME' ? 'DM' : 'TRX';
       const sameTypeTx = transactions.filter(t => t.id.startsWith(prefix));
       let maxNum = 0;
-      sameTypeTx.forEach(t => {
-        const numPart = parseInt(t.id.split('-')[1]);
-        if (!isNaN(numPart) && numPart > maxNum) maxNum = numPart;
-      });
-      const newId = `${prefix}-${(maxNum + 1).toString().padStart(3, '0')}`;
+      sameTypeTx.forEach(t => { const numPart = parseInt(t.id.split('-')[1]); if (!isNaN(numPart) && numPart > maxNum) maxNum = numPart; });
+      const newId = prefix + '-' + (maxNum + 1).toString().padStart(3, '0');
       
-      setTransactions([...transactions, { 
-        ...formData, 
-        id: newId, 
-        amount,
-        verificationStatus: 'UNVERIFIED',
-        status: 'ACTIVE'
-      }]);
+      dbItem.id = newId;
+      let newVerificationStatus = 'UNVERIFIED';
+      if (formData.proofStatus === 'LENGKAP' && formData.type === 'INCOME') newVerificationStatus = 'VERIFIED';
+      if (formData.type === 'EXPENSE' && (formData.category === 'Lain-lain' || formData.category === 'Operasional' || formData.category === 'Transportasi') && formData.proofStatus === 'TIDAK_ADA' && amount <= 50000) newVerificationStatus = 'VERIFIED';
+      dbItem.verification_status = newVerificationStatus;
+
+      setTransactions([...transactions, { id: newId, ...formData, amount, verificationStatus: newVerificationStatus, status: 'ACTIVE' }]);
+      await supabase.from('transactions').insert([dbItem]);
     }
     setIsModalOpen(false);
+    setCustomAlert({ type: 'success', message: 'Transaksi berhasil disimpan!'});
   };
 
   const handleVerify = async (id) => {
