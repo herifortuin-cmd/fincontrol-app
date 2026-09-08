@@ -771,9 +771,6 @@ export default function App() {
     }
 
     // INPUT & EDIT MODE
-    const [formData, setFormData] = useState(selectedTx || {
-      date: new Date().toISOString().split('T')[0], type: modalType, category: modalType === 'INCOME' ? 'Tambahan Modal' : CATEGORIES[0], description: '', amount: '', recipient: '', proofStatus: 'LENGKAP', notes: '', proofUrl: null
-    });
 
     return (
       <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center z-[100] p-2 md:p-4 animate-in fade-in zoom-in-95 duration-200">
