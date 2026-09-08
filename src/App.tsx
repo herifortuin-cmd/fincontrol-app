@@ -12,7 +12,7 @@ const CATEGORIES = [
 
 // Data awal ditambahkan status: 'ACTIVE' untuk mendukung Soft Delete
 const INITIAL_DATA = [
-  { id: 'DM-001', date: '2026-07-21', type: 'INCOME', category: 'Modal Awal', description: 'SALDO', amount: 3000000, recipient: 'Heri', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
+  { id: 'DM-001', date: '2026-07-21', type: 'INCOME', category: 'Modal Awal', description: 'SALDO', amount: 3000000, recipient: 'Owner', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-001', date: '2026-07-29', type: 'EXPENSE', category: 'Hama & Penyakit', description: 'Tridazol', amount: 135500, recipient: 'Shopee', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-001.jpg' },
   { id: 'TRX-002', date: '2026-07-29', type: 'EXPENSE', category: 'Bibit & Penanaman', description: 'Bibit Raja Tavi', amount: 125000, recipient: 'Shopee', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-001.jpg' },
   { id: 'TRX-003', date: '2026-07-29', type: 'EXPENSE', category: 'Pupuk', description: 'Gema Flora (Kalium)', amount: 102500, recipient: 'Shopee', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-001.jpg' },
@@ -29,15 +29,15 @@ const INITIAL_DATA = [
   { id: 'TRX-014', date: '2026-08-03', type: 'EXPENSE', category: 'Peralatan', description: 'Drum (2 buah) & Ember (2 buah)', amount: 750000, recipient: 'Toko Sidoluhur', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-015', date: '2026-08-03', type: 'EXPENSE', category: 'Pupuk', description: 'Dolomit 4 sak', amount: 280000, recipient: 'Beringin Kulon', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-016', date: '2026-08-03', type: 'EXPENSE', category: 'Pupuk', description: 'Fertiphos 1 Sak', amount: 200000, recipient: 'Beringin Kulon', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
-  { id: 'DM-002', date: '2026-08-07', type: 'INCOME', category: 'Tambahan Modal', description: 'SALDO', amount: 5000000, recipient: 'Heri', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
+  { id: 'DM-002', date: '2026-08-07', type: 'INCOME', category: 'Tambahan Modal', description: 'SALDO', amount: 5000000, recipient: 'Owner', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-017', date: '2026-08-09', type: 'EXPENSE', category: 'Peralatan', description: 'Plastik Mulsa 2 Roll', amount: 2100000, recipient: 'Toko Cintamulya', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-018', date: '2026-08-09', type: 'EXPENSE', category: 'Persiapan Lahan', description: 'Pelunasan Bambu & Biaya Pengiriman', amount: 700000, recipient: 'Mang Asep', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-019', date: '2026-08-11', type: 'EXPENSE', category: 'Tenaga Kerja', description: 'Upah Pekerja', amount: 1000000, recipient: 'Tim Nasroh', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-020', date: '2026-08-12', type: 'EXPENSE', category: 'Pupuk', description: 'TSP', amount: 720000, recipient: 'Salim Tani', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-005.jpg' },
   { id: 'TRX-021', date: '2026-08-12', type: 'EXPENSE', category: 'Pupuk', description: 'NPK 16-16-16, 14kg', amount: 280000, recipient: 'Salim Tani', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-005.jpg' },
-  { id: 'DM-003', date: '2026-08-16', type: 'INCOME', category: 'Tambahan Modal', description: 'SALDO', amount: 650000, recipient: 'Heri', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
+  { id: 'DM-003', date: '2026-08-16', type: 'INCOME', category: 'Tambahan Modal', description: 'SALDO', amount: 650000, recipient: 'Owner', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-022', date: '2026-08-16', type: 'EXPENSE', category: 'Tenaga Kerja', description: 'Upah Pekerja', amount: 625000, recipient: 'Tim Nasroh', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
-  { id: 'DM-004', date: '2026-08-22', type: 'INCOME', category: 'Tambahan Modal', description: 'SALDO', amount: 3000000, recipient: 'Heri', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
+  { id: 'DM-004', date: '2026-08-22', type: 'INCOME', category: 'Tambahan Modal', description: 'SALDO', amount: 3000000, recipient: 'Owner', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-023', date: '2026-08-22', type: 'EXPENSE', category: 'Lain-lain', description: 'Admin', amount: 15000, recipient: 'BRI link', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-024', date: '2026-08-22', type: 'EXPENSE', category: 'Tenaga Kerja', description: 'Upah Pekerja', amount: 750000, recipient: 'Tim Nasroh', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-025', date: '2026-08-22', type: 'EXPENSE', category: 'Peralatan', description: 'Tangki Swan', amount: 700000, recipient: 'Toko Antariksa', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-007.jpg' },
@@ -47,7 +47,7 @@ const INITIAL_DATA = [
   { id: 'TRX-029', date: '2026-08-25', type: 'EXPENSE', category: 'Peralatan', description: 'Pemotong pipa', amount: 42500, recipient: 'Shopee', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-009.jpg' },
   { id: 'TRX-030', date: '2026-08-28', type: 'EXPENSE', category: 'Lain-lain', description: 'Token Listrik', amount: 53000, recipient: 'BCA', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-010.jpg' },
   { id: 'TRX-031', date: '2026-08-29', type: 'EXPENSE', category: 'Tenaga Kerja', description: 'Upah Pekerja', amount: 1250000, recipient: 'Tim Nasroh', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
-  { id: 'DM-005', date: '2026-09-03', type: 'INCOME', category: 'Tambahan Modal', description: 'SALDO', amount: 15000000, recipient: 'Heri', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-013.png' },
+  { id: 'DM-005', date: '2026-09-03', type: 'INCOME', category: 'Tambahan Modal', description: 'SALDO', amount: 15000000, recipient: 'Owner', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-013.png' },
   { id: 'TRX-032', date: '2026-09-03', type: 'EXPENSE', category: 'Peralatan', description: 'Selang Drip 3/4 5 rol Asam humat 1', amount: 815000, recipient: 'Salim Tani', proofStatus: 'LENGKAP', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: '/nota/TRX-012.jpg' },
   { id: 'TRX-033', date: '2026-09-03', type: 'EXPENSE', category: 'Bibit & Penanaman', description: 'Pelunasan Bibit', amount: 225000, recipient: 'Yoyon', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
   { id: 'TRX-034', date: '2026-09-03', type: 'EXPENSE', category: 'Peralatan', description: 'Selang piping 5 rol', amount: 100000, recipient: 'Toko Cintamulya', proofStatus: 'PENGGANTI', verificationStatus: 'VERIFIED', status: 'ACTIVE', notes: '', proofUrl: null },
@@ -1008,6 +1008,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
