@@ -79,6 +79,37 @@ export default function App() {
     fetchTransactions();
   }, []);
 
+  // Sinkronisasi Tab dengan Tombol Back Browser
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').toUpperCase() || 'DASHBOARD';
+      if (['DASHBOARD', 'TRANSAKSI', 'BUKTI'].includes(hash)) {
+        setActiveTab(hash);
+      }
+    };
+    handleHashChange(); // Set awal
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    const currentHash = window.location.hash.replace('#', '').toUpperCase();
+    if (currentHash !== activeTab && currentHash !== 'MODAL') {
+      window.history.pushState(null, '', '#' + activeTab.toLowerCase());
+    }
+  }, [activeTab]);
+
+  // Sinkronisasi Modal dengan Tombol Back Browser
+  useEffect(() => {
+    const handlePopState = () => {
+      if (isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [isModalOpen]);
+
   const fetchTransactions = async () => {
     setIsLoading(true);
     const { data, error } = await supabase.from('transactions').select('*').order('date', { ascending: false });
