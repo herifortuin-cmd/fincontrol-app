@@ -867,7 +867,7 @@ export default function App() {
                             <p className="mb-1 text-sm text-slate-600 font-bold"><span className="text-emerald-600">Pilih foto</span> atau Buka Kamera</p>
                             <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest">JPG, PNG, WEBP</p>
                           </div>
-                          <input type="file" className="hidden" accept="image/*" capture="environment" onChange={(e) => {
+                          <input type="file" className="hidden" accept="image/*" onChange={(e) => {
                             const file = e.target.files[0];
                             if (file) {
                               const url = URL.createObjectURL(file);
@@ -1008,6 +1008,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
