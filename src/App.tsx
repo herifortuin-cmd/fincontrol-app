@@ -4,6 +4,7 @@ import {
   CheckCircle2, XCircle, AlertTriangle, ShieldCheck, User, ChevronRight, Eye, 
   FileCheck, Menu, Image as ImageIcon, UploadCloud, Trash2, History
 } from 'lucide-react';
+import { supabase } from './lib/supabase';
 
 const CATEGORIES = [
   'Persiapan Lahan', 'Bibit & Penanaman', 'Pupuk', 'Hama & Penyakit', 
@@ -71,7 +72,26 @@ const formatDate = (dateString) => {
 export default function App() {
   const [activeTab, setActiveTab] = useState('DASHBOARD');
   const [role, setRole] = useState('OWNER'); // ADMIN, OWNER, STAFF
-  const [transactions, setTransactions] = useState(INITIAL_DATA);
+  const [transactions, setTransactions] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
+  const fetchTransactions = async () => {
+    setIsLoading(true);
+    const { data, error } = await supabase.from('transactions').select('*').order('date', { ascending: false });
+    if (!error && data) {
+      const mappedData = data.map(item => ({
+        id: item.id, date: item.date, type: item.type, category: item.category, description: item.description,
+        amount: item.amount, recipient: item.recipient, proofStatus: item.proof_status,
+        verificationStatus: item.verification_status, status: item.status, notes: item.notes, proofUrl: item.proof_url
+      }));
+      setTransactions(mappedData.sort((a, b) => new Date(b.date) - new Date(a.date)));
+    }
+    setIsLoading(false);
+  };
   
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState('EXPENSE'); 
@@ -209,24 +229,20 @@ export default function App() {
     setIsModalOpen(false);
   };
 
-  const handleVerify = (id) => {
+  const handleVerify = async (id) => {
     if (role !== 'ADMIN' && role !== 'OWNER') return;
     setTransactions(transactions.map(t => t.id === id ? { ...t, verificationStatus: 'VERIFIED' } : t));
+    await supabase.from('transactions').update({ verification_status: 'VERIFIED' }).eq('id', id);
   };
 
   const handleVoidTransaction = (id) => {
-    if (role === 'STAFF') {
-       setCustomAlert({ type: 'error', message: 'Staff tidak memiliki akses untuk membatalkan transaksi.'});
-       return;
-    }
-    
+    if (role !== 'ADMIN') { setCustomAlert({ type: 'error', message: 'Hanya Admin yang memiliki akses untuk membatalkan transaksi.'}); return; }
     setCustomAlert({
-      type: 'confirm',
-      message: `Yakin ingin MEMBATALKAN transaksi ${id}? Data akan di-Void dan tidak dihitung dalam saldo.`,
-      onConfirm: () => {
+      type: 'confirm', message: "Yakin ingin MEMBATALKAN transaksi " + id + "? Data akan di-Void dan tidak dihitung dalam saldo.,
+      onConfirm: async () => {
         setTransactions(transactions.map(t => t.id === id ? { ...t, status: 'VOID', verificationStatus: 'UNVERIFIED' } : t));
-        setIsModalOpen(false);
-        setCustomAlert(null);
+        await supabase.from('transactions').update({ status: 'VOID', verification_status: 'UNVERIFIED' }).eq('id', id);
+        setIsModalOpen(false); setCustomAlert(null);
       }
     });
   };
@@ -1008,6 +1024,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
