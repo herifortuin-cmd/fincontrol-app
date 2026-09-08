@@ -983,8 +983,8 @@ export default function App() {
             </div>
 
             {activeTab === 'DASHBOARD' && <DashboardView />}
-            {activeTab === 'TRANSAKSI' && {renderTransactionsView()}}
-            {activeTab === 'BUKTI' && {renderProofGalleryView()}}
+            {activeTab === 'TRANSAKSI' && renderTransactionsView()}
+            {activeTab === 'BUKTI' && renderProofGalleryView()}
           </div>
         </div>
       </main>
@@ -1021,10 +1021,11 @@ export default function App() {
         </div>
       )}
 
-      {isModalOpen && {renderFormModal()}}
+      {isModalOpen && renderFormModal()}
     </div>
   );
 }
+
 
 
 
