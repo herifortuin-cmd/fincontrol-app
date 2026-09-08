@@ -245,6 +245,9 @@ export default function App() {
   const openForm = (type, tx = null) => {
     setSelectedTx(tx);
     setModalType(type);
+    setFormData(tx || {
+      date: new Date().toISOString().split('T')[0], type: type, category: type === 'INCOME' ? 'Tambahan Modal' : CATEGORIES[0], description: '', amount: '', recipient: '', proofStatus: 'LENGKAP', notes: '', proofUrl: null
+    });
     setIsModalOpen(true);
     setIsFabOpen(false);
   };
