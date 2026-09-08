@@ -883,11 +883,26 @@ export default function App() {
                             <p className="mb-1 text-sm text-slate-600 font-bold"><span className="text-emerald-600">Pilih foto</span> atau Buka Kamera</p>
                             <p className="text-[10px] text-slate-400 font-medium uppercase tracking-widest">JPG, PNG, WEBP</p>
                           </div>
-                          <input type="file" className="hidden" accept="image/*" onChange={(e) => {
+                          <input type="file" className="hidden" accept="image/*" onChange={async (e) => {
                             const file = e.target.files[0];
                             if (file) {
-                              const url = URL.createObjectURL(file);
-                              setFormData({...formData, proofUrl: url});
+                              const labelEl = e.target.closest('label').querySelector('p span');
+                              const oldText = labelEl.innerText;
+                              labelEl.innerText = 'Meng-upload...';
+                              
+                              const fileExt = file.name.split('.').pop();
+                              const fileName = "receipt_" + Date.now() + "." + fileExt;
+                              
+                              const { data, error } = await supabase.storage.from('receipts').upload(fileName, file);
+                              
+                              if (error) {
+                                alert('Gagal upload: ' + error.message);
+                                labelEl.innerText = oldText;
+                              } else {
+                                const { data: { publicUrl } } = supabase.storage.from('receipts').getPublicUrl(fileName);
+                                setFormData({...formData, proofUrl: publicUrl});
+                                labelEl.innerText = oldText;
+                              }
                             }
                           }} />
                         </label>
@@ -1024,6 +1039,7 @@ export default function App() {
     </div>
   );
 }
+
 
 
 
