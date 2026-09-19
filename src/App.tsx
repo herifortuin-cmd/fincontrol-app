@@ -321,7 +321,7 @@ export default function App() {
   ];
 
   const renderSidebar = () => (
-    <div className="hidden md:flex w-64 bg-slate-900 text-slate-300 flex-col h-screen fixed left-0 top-0">
+    <div className="hidden md:flex w-64 bg-slate-900 text-slate-300 flex-col h-screen fixed left-0 top-0 print:hidden">
       <div className="p-6 border-b border-slate-800">
         <h1 className="text-xl font-bold text-white tracking-tight">Fin<span className="text-emerald-500">Control</span></h1>
         <p className="text-[10px] text-slate-400 mt-1 uppercase tracking-wider font-bold">Sistem Akuntabilitas</p>
@@ -958,7 +958,7 @@ export default function App() {
       {renderMobileBottomNav()}
       {renderAlertBox()}
       
-      <main className="flex-1 md:ml-64 flex flex-col h-[calc(100vh-4rem)] md:h-screen overflow-hidden relative">
+      <main className="flex-1 md:ml-64 print:ml-0 flex flex-col h-[calc(100vh-4rem)] md:h-screen print:h-auto overflow-hidden print:overflow-visible relative">
         
         <header className="bg-white border-b border-slate-200 h-14 md:h-16 flex items-center justify-between px-4 md:px-8 shrink-0 z-10 sticky top-0">
           <div className="md:hidden flex items-center">
