@@ -958,7 +958,7 @@ export default function App() {
       {renderMobileBottomNav()}
       {renderAlertBox()}
       
-      <main className="flex-1 md:ml-64 print:ml-0 flex flex-col h-[calc(100vh-4rem)] md:h-screen print:h-auto overflow-hidden print:overflow-visible relative">
+      <main className="flex-1 md:ml-64 print:ml-0 flex flex-col print:block h-[calc(100vh-4rem)] md:h-screen print:h-auto overflow-hidden print:overflow-visible relative">
         
         <header className="bg-white border-b border-slate-200 h-14 md:h-16 flex items-center justify-between px-4 md:px-8 shrink-0 z-10 sticky top-0">
           <div className="md:hidden flex items-center">
@@ -1002,7 +1002,7 @@ export default function App() {
           </div>
         </header>
 
-        <div className="flex-1 overflow-auto print:overflow-visible p-4 md:p-8 relative">
+        <div className="flex-1 print:block overflow-auto print:overflow-visible p-4 md:p-8 relative">
           <div className="max-w-6xl mx-auto pb-6">
             <div className="mb-4 md:mb-6">
               <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">
