@@ -1002,7 +1002,7 @@ export default function App() {
           </div>
         </header>
 
-        <div className="flex-1 overflow-auto p-4 md:p-8 relative">
+        <div className="flex-1 overflow-auto print:overflow-visible p-4 md:p-8 relative">
           <div className="max-w-6xl mx-auto pb-6">
             <div className="mb-4 md:mb-6">
               <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">
