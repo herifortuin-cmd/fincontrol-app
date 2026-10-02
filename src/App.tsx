@@ -468,29 +468,46 @@ export default function App() {
            <h3 className="text-base md:text-lg font-bold text-slate-800 mb-1">Rincian Penggunaan Dana</h3>
            <p className="text-xs md:text-sm text-slate-500 mb-4 md:mb-6">Sentuh baris kategori untuk melakukan drill-down data.</p>
            
-           <div className="space-y-3 md:space-y-4">
-             {CATEGORIES.map(category => {
-               const data = stats.categoryBreakdown[category];
-               if (data.amount === 0) return null; 
-               
-               return (
-                 <div key={category} className="group flex flex-col cursor-pointer p-2 -mx-2 rounded-lg hover:bg-slate-50 transition-colors active:bg-slate-100" onClick={() => handleDrillDown(category)}>
-                   <div className="flex justify-between items-center mb-1">
-                     <span className="text-xs md:text-sm font-medium text-slate-700 group-hover:text-indigo-600 flex items-center">
-                       {category} <span className="text-[10px] md:text-xs text-slate-400 ml-1 md:ml-2">({data.count} trx)</span>
-                     </span>
-                     <span className="text-xs md:text-sm font-bold text-slate-800">{formatRupiah(data.amount)}</span>
-                   </div>
-                   <div className="flex items-center">
-                     <div className="w-full bg-slate-100 rounded-full h-1.5 md:h-2 mr-3">
-                       <div className="bg-indigo-500 h-1.5 md:h-2 rounded-full group-hover:bg-indigo-600 transition-colors" style={{ width: `${data.percentage}%` }}></div>
+           
+           {(()=>{
+              const renderGroup = (title, cats) => {
+                 const hasData = cats.some(c => stats.categoryBreakdown[c]?.amount > 0);
+                 if (!hasData) return null;
+                 return (
+                   <div className="mb-6 last:mb-0">
+                     <h4 className="text-[11px] font-black text-slate-400 mb-3 uppercase tracking-widest border-b border-slate-100 pb-2">{title}</h4>
+                     <div className="space-y-3 md:space-y-4">
+                       {cats.map(category => {
+                         const data = stats.categoryBreakdown[category];
+                         if (!data || data.amount === 0) return null;
+                         return (
+                           <div key={category} className="group flex flex-col cursor-pointer p-2 -mx-2 rounded-lg hover:bg-slate-50 transition-colors active:bg-slate-100" onClick={() => handleDrillDown(category)}>
+                             <div className="flex justify-between items-center mb-1">
+                               <span className="text-xs md:text-sm font-medium text-slate-700 group-hover:text-indigo-600 flex items-center">
+                                 {category} <span className="text-[10px] md:text-xs text-slate-400 ml-1 md:ml-2">({data.count} trx)</span>
+                               </span>
+                               <span className="text-xs md:text-sm font-bold text-slate-800">{formatRupiah(data.amount)}</span>
+                             </div>
+                             <div className="flex items-center">
+                               <div className="w-full bg-slate-100 rounded-full h-1.5 md:h-2 mr-3">
+                                 <div className="bg-indigo-500 h-1.5 md:h-2 rounded-full group-hover:bg-indigo-600 transition-colors" style={{ width: ${data.percentage}% }}></div>
+                               </div>
+                               <span className="text-[10px] md:text-xs text-slate-500 w-8 text-right font-medium">{data.percentage}%</span>
+                             </div>
+                           </div>
+                         );
+                       })}
                      </div>
-                     <span className="text-[10px] md:text-xs text-slate-500 w-8 text-right font-medium">{data.percentage}%</span>
                    </div>
+                 );
+              };
+              return (
+                 <div>
+                    {renderGroup('1. KEBUN CABE', ['Persiapan Lahan', 'Bibit & Penanaman', 'Pupuk', 'Hama & Penyakit', 'Tenaga Kerja', 'Peralatan'])}
+                    {renderGroup('2. LAIN-LAIN', ['Operasional', 'Transportasi', 'Lain-lain'])}
                  </div>
-               );
-             })}
-           </div>
+              );
+           })()}
         </div>
       </div>
     </div>
