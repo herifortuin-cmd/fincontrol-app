@@ -493,7 +493,7 @@ export default function App() {
                              </div>
                              <div className="flex items-center">
                                <div className="w-full bg-slate-100 rounded-full h-1.5 md:h-2 mr-3">
-                                 <div className="bg-indigo-500 h-1.5 md:h-2 rounded-full group-hover:bg-indigo-600 transition-colors" style={{ width: ${data.percentage}% }}></div>
+                                 <div className="bg-indigo-500 h-1.5 md:h-2 rounded-full group-hover:bg-indigo-600 transition-colors" style={{ width: data.percentage + '%' }}></div>
                                </div>
                                <span className="text-[10px] md:text-xs text-slate-500 w-8 text-right font-medium">{data.percentage}%</span>
                              </div>
