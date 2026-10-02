@@ -471,11 +471,14 @@ export default function App() {
            
            {(()=>{
               const renderGroup = (title, cats) => {
-                 const hasData = cats.some(c => stats.categoryBreakdown[c]?.amount > 0);
-                 if (!hasData) return null;
+                 const groupTotal = cats.reduce((sum, c) => sum + (stats.categoryBreakdown[c]?.amount || 0), 0);
+                 if (groupTotal === 0) return null;
                  return (
                    <div className="mb-6 last:mb-0">
-                     <h4 className="text-[11px] font-black text-slate-400 mb-3 uppercase tracking-widest border-b border-slate-100 pb-2">{title}</h4>
+                     <h4 className="flex justify-between items-center text-[11px] font-black text-slate-400 mb-3 uppercase tracking-widest border-b border-slate-100 pb-2">
+                       <span>{title}</span>
+                       <span className="text-indigo-600">{formatRupiah(groupTotal)}</span>
+                     </h4>
                      <div className="space-y-3 md:space-y-4">
                        {cats.map(category => {
                          const data = stats.categoryBreakdown[category];
